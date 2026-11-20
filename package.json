@@ -1,0 +1,33 @@
+{
+  "name": "@pipeworx/mcp-psa-ph",
+  "version": "0.1.0",
+  "description": "Philippine Statistics Authority (PSA) — OpenSTAT database MCP.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./tools.json": "./tools.json",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "mcp-psa-ph": "bin/cli.js"
+  },
+  "files": ["bin/", "lib/", "tools.json", "server.json"],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["mcp", "mcp-server", "model-context-protocol", "pipeworx", "psa-ph"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pipeworx-io/mcp-psa-ph.git"
+  },
+  "mcpName": "io.github.pipeworx-io/psa-ph",
+  "pipeworx": {
+    "mode": "gateway",
+    "slug": "psa-ph",
+    "gatewaySlug": "psa-ph",
+    "sourceHash": "v1-7056da8fb3c987727a447697f6ff5906754df87901e8363ef70a6de19b98b60a",
+    "sourceCommit": "01fc48151e144f8b0923c0f986eb172c285e5e09"
+  }
+}

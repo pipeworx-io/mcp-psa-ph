@@ -1,0 +1,68 @@
+[
+  {
+    "name": "psa_ph_search_tables",
+    "description": "Find Philippine Statistics Authority (PSA) statistical tables by keyword, consumer prices and inflation, labour force, population, poverty, GDP, trade, agriculture, tourism and the rest of the Philippine official statistics. Returns each table's native id (e.g. \"2M/PI/CPI/2018/0012M4ACP09.px\"), title and last-updated date; pass that id unchanged to psa_ph_table_info and psa_ph_get_data. Index hits for tables the publisher has since removed are dropped and counted; results in a frozen old-series folder carry `newer_series_folder`. Pass `folder` to browse the tree. Philippines only.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Keywords, e.g. \"consumer price index\", \"unemployment rate\", \"palay production\"."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Max tables to return (default 10, max 15)."
+        },
+        "folder": {
+          "type": "string",
+          "description": "Browse instead of searching: a folder path such as \"2M/PI/CPI/2018NEW\" (empty string lists the theme folders). Ignores query."
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "psa_ph_table_info",
+    "description": "Describe one Philippine Statistics Authority (PSA) table: its title (which carries the unit and base year), its dimensions, how many values each has, and the valid value codes with labels so a selection can be written for psa_ph_get_data. Value codes are positional (\"0\", \"1\", ...); labels are the real names. Pass `dimension` to list every value of one dimension (optionally filtered with `match`) when it has more than the preview shows.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "table_id": {
+          "type": "string",
+          "description": "Native table id from psa_ph_search_tables, e.g. \"2M/PI/CPI/2018/0012M4ACP09.px\"."
+        },
+        "dimension": {
+          "type": "string",
+          "description": "Optional dimension code or label to list in full, e.g. \"Commodity Description\"."
+        },
+        "match": {
+          "type": "string",
+          "description": "With `dimension`: only values whose label contains this text."
+        }
+      },
+      "required": [
+        "table_id"
+      ]
+    }
+  },
+  {
+    "name": "psa_ph_get_data",
+    "description": "Get figures from a Philippine Statistics Authority (PSA) table as labelled rows (dimension labels, value, unit text from the table title, period, data_as_of). `select` maps a dimension (code or label) to what you want: a value label or code, an array of them, \"*\" for all, \"first\", \"last\", or \"last:N\" for the final N. Matching is by exact code, exact label, then label text. Any dimension you leave out is defaulted, time dimensions to their latest value, every other to its first value (usually the total), and every default is listed in `selection_resolved` and `note`. Selections above 1,500 cells are refused with the sizes so you can narrow them.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "table_id": {
+          "type": "string",
+          "description": "Native table id from psa_ph_search_tables."
+        },
+        "select": {
+          "type": "object",
+          "description": "Map of dimension code/label to value(s), e.g. {\"Commodity Description\":\"0 - ALL ITEMS\",\"Year\":\"2025\",\"Period\":[\"Oct\",\"Nov\"]}."
+        }
+      },
+      "required": [
+        "table_id"
+      ]
+    }
+  }
+]

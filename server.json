@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.pipeworx-io/psa-ph",
+  "title": "Psa Ph",
+  "description": "Philippine Statistics Authority (PSA) — OpenSTAT database MCP.",
+  "version": "0.1.0",
+  "websiteUrl": "https://pipeworx.io/packs/psa-ph",
+  "repository": {
+    "url": "https://github.com/pipeworx-io/mcp-psa-ph",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://gateway.pipeworx.io/psa-ph/mcp"
+    }
+  ]
+}
